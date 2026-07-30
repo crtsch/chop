@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
+
+:root {
+    --bg: 245, 246, 250;
+    --shadow: 22, 26, 89;
+    --accent: 245, 40, 85;
+    --secondary: 239, 240, 255;
+    --text-primary: 4, 6, 47;
+    --text-secondary: 139, 141, 172;
+
+    
+    --dark-bg: 4, 4, 10;
+    --dark-shadow: 181, 177, 196; /* 17% */
+    --dark-accent: 224, 28, 71;
+    --dark-secondary: 239, 240, 255;
+    --dark-text-primary: 239, 240, 255;
+    --dark-text-secondary: 121, 122, 133;
+}
+
+body {
+    background-color: rgb(var(--bg));
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    font-family: "Unbounded", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+* {
+    font-family: inherit;
+    transition: 0.2s ease;
+}
+
+#content {
+    margin: 30px;
+    width: 85vw;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+/* MENU */
+
+#header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#menu {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+#menu div {
+    display: flex;
+    align-items: center;
+}
+
+#logo {
+    justify-content: left;
+}
+
+#ajouter-btn {
+    justify-content: right;
+}
+
+#logo, #ajouter-btn {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+}
+
+#logo img, #ajouter-btn img, #recherche input {
+    height: 50%;
+}
+
+#logo a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+
+#filters {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.filter {
+    background-color: rgb(var(--secondary));
+    color: rgba(var(--shadow), 0.5);
+    padding: 5px 20px;
+    border-radius: 9999px;
+    width: fit-content;
+    font-size: 12px;
+}
+
+
+
+
+
+/* Barre de recherche */
+
+#recherche {
+    flex: 3;
+    height: 100%;
+    width: 100%;
+}
+
+#recherche-input {
+    width: 100%;
+    border-radius: 9999px;
+    padding-inline: 30px;
+    border: none;
+    background-color: rgb(var(--secondary));
+    color: rgb(var(--shadow))
+}
+
+#recherche-input::placeholder {
+    color: rgba(var(--shadow), 0.5)
+}
+
+#recherche-input:focus {
+    outline: none;
+}
+
+
+
+
+
+
+/* FOOTER */
+
+#footer {
+    background-color: rgb(var(--accent));
+    border-radius: 20px 20px 0 0;
+    position: fixed;
+    bottom: 0;
+    height: 64px;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: rgb(var(--bg));
+    transform: translateY(50px);
+    z-index: 1000;
+}
+
+#footer:hover {
+    transform: translateY(0px);
+}
+
+#footer-gauche {
+    flex: 1;
+    padding-inline: 30px;
+    text-align: left;
+    cursor: default;
+}
+
+#footer-centre {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#footer-centre img {
+    height: 40%;
+    width: auto;
+}
+
+#footer-droite {
+    flex: 1;
+    padding-inline: 30px;
+    display: flex;
+    justify-content: right;
+}
+
+#footer-droite p {
+    width: fit-content;
+    cursor: pointer;
+}
