@@ -18,6 +18,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(process.cwd(), 'views', 'home.html'));
 });
 
+app.get('/recette', (req, res) => {
+    res.sendFile(path.join(process.cwd(), 'views', 'recipe.html'));
+})
+
 
 app.listen(port, () => {
     console.log(`Serveur lancé, port ${port}`)

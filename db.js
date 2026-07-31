@@ -11,8 +11,9 @@ export async function initDB() {
     await dbInstance.exec(`CREATE TABLE IF NOT EXISTS recipes (
             id              INTEGER             PRIMARY KEY AUTOINCREMENT,
             created_at      DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            author          TEXT                NOT NULL DEFAULT 'Auteur inconnu',
             title           TEXT                NOT NULL,
-            description     TEXT,
+            description     TEXT                NOT NULL DEFAULT 'Aucune description',
             slug            TEXT                NOT NULL UNIQUE,
             image           TEXT                NOT NULL DEFAULT 'default.png',
             category        TEXT                NOT NULL DEFAULT 'autre',
