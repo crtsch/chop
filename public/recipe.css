@@ -42,8 +42,20 @@
     border-right: 2px solid rgb(var(--accent));
 }
 
+.info img {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
 .info:last-child {
     border-right: none;
+}
+
+.plus {
+    padding-inline: 10px;
 }
 
 
@@ -95,15 +107,15 @@ h2 {
 
 #ingredients {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 11.5rem));
+    grid-template-columns: repeat(auto-fit, 13rem);
     justify-content: center;
     gap: 40px;
     max-width: 60%;
+    margin-top: 20px;
 }
 
 .ingredient {
     box-sizing: border-box;
-    width: 100%;
     background-color: rgb(var(--bg));
     box-shadow: 0 5px 30px rgba(var(--shadow), 0.17);
     border-radius: 20px;
@@ -115,9 +127,13 @@ h2 {
     text-align: center;
 }
 
+.ingredient:hover {
+    transform: translateY(-15px);
+}
+
 .ingredient img {
+    height: 100%;
     width: 100%;
-    aspect-ratio: 1 / 1;
     object-fit: contain;
 }
 
@@ -143,6 +159,11 @@ h2 {
     align-items: center;
     text-align: justify;
     margin-top: 20px;
+    border-radius: 20px;
+}
+
+.etape:hover {
+    box-shadow: 0 5px 30px rgba(var(--shadow), 0.17);
 }
 
 .etape-num {
@@ -155,10 +176,12 @@ h2 {
     -webkit-text-stroke-color: transparent;
     -webkit-text-stroke-width: 5px;
     flex: 1;
+    padding-left: 20px;
 }
 
 .etape-desc {
-    flex: 8
+    flex: 8;
+    padding: 20px 20px 20px 0;
 }
 
 
