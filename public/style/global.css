@@ -224,7 +224,8 @@ a {
 
 #footer-droite p {
     width: fit-content;
-    cursor: pointer;
+    text-decoration: none;
+    color: rgb(var(--bg));
 }
 
 

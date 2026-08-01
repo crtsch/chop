@@ -1,0 +1,62 @@
+h1 {
+    width: 60%;
+    background-color: rgb(var(--accent));
+    padding: 20px;
+    text-align: center;
+    color: rgb(var(--bg));
+    border-radius: 9999px;
+    margin-bottom: 50px;
+}
+
+#taches {
+    width: fit-content;
+    max-width: 60%;
+}
+
+#taches li {
+    margin-bottom: 20px;
+}
+
+#taches li::marker {
+  color: rgb(var(--accent));
+  font-size: larger;
+}
+
+.cat {
+    color: rgb(var(--accent))
+}
+
+#retour-btn {
+    border: 2px solid rgb(var(--accent));
+    background-color: rgb(var(--bg));
+    color: rgb(var(--accent));
+    padding: 15px 50px;
+    border-radius: 9999px;
+    cursor: pointer;
+    margin-top: 50px;
+}
+
+#retour-btn:hover {
+    background-color: rgb(var(--accent));
+    color: rgb(var(--bg));
+    box-shadow: 0 5px 30px rgba(var(--shadow), 0.3);
+    padding: 15px 45px;
+}
+
+#retour-btn #fleche {
+    margin-right: 0px;
+}
+
+#retour-btn:hover #fleche {
+    margin-right: 10px;
+}
+
+#taches-faites li {
+    color: green;
+    text-decoration: line-through;
+    font-style: italic;
+}
+
+#taches-faites li .cat {
+    color: darkgreen;
+}

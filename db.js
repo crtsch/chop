@@ -16,11 +16,13 @@ export async function initDB() {
             description     TEXT                NOT NULL DEFAULT 'Aucune description',
             slug            TEXT                NOT NULL UNIQUE,
             image           TEXT                NOT NULL DEFAULT 'default.png',
-            category        TEXT                NOT NULL DEFAULT 'autre',
+            category        TEXT                NOT NULL DEFAULT 'Autre',
+            price           TEXT,
             prep_time       INTEGER,
             rest_time       INTEGER,
             cook_time       INTEGER,
             note            DECIMAL(2,1),
+            difficulty      TEXT,
             steps           TEXT[]              NOT NULL
         );
         
