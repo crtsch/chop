@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  mon-app-container: # Le nom du service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chop-container # <--- TRÈS IMPORTANT : Note bien ce nom pour NPM
+    restart: unless-stopped
+    networks:
+      - web
+networks:
+  web:
+    external: true
