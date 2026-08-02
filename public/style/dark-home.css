@@ -1,0 +1,20 @@
+.dark .recette {
+    background-color: rgb(var(--dark-bg));
+    box-shadow: 0 5px 30px rgba(var(--dark-shadow), 0.17);
+}
+
+.dark .recette-titre {
+    color: rgb(var(--dark-accent));
+}
+
+.dark .recette-note {
+    color: rgb(var(--dark-text-secondary));
+}
+
+.dark .recette-description {
+    color: rgb(var(--dark-text-secondary));
+}
+
+.dark .recette-synthese {
+    color: rgba(var(--dark-accent), 0.7);
+}

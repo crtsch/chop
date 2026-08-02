@@ -8,9 +8,14 @@ h1 {
     margin-bottom: 50px;
 }
 
+div {
+    text-align: justify;
+}
+
 #taches {
     width: fit-content;
     max-width: 60%;
+    list-style-position: inside;
 }
 
 #taches li {
@@ -33,7 +38,6 @@ h1 {
     padding: 15px 50px;
     border-radius: 9999px;
     cursor: pointer;
-    margin-top: 50px;
 }
 
 #retour-btn:hover {
@@ -51,12 +55,26 @@ h1 {
     margin-right: 10px;
 }
 
-#taches-faites li {
+.tache-faite {
     color: green;
     text-decoration: line-through;
     font-style: italic;
 }
 
+a {
+    margin-top: 30px;
+}
+
 #taches-faites li .cat {
     color: darkgreen;
+}
+
+
+@media (max-width: 768px) {
+    h1 {
+        width: 100%;
+    }
+    #taches {
+        max-width: 100%;
+    }
 }

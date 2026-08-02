@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recette | CHOP</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.25/dist/lenis.css">
     <link rel="stylesheet" href="/style/global.css">
     <link rel="stylesheet" href="/style/recipe.css">
+    <link rel="stylesheet" href="/style/dark-global.css">
+    <link rel="stylesheet" href="/style/dark-recipe.css">
     <link rel="icon" type="image/png" href="/assets/logo/logo_fond_o.png">
+
 </head>
 <body>
     
@@ -36,33 +41,17 @@
 
 
         <div id="image">
-            <h1>Pizza margherita à ma façon</h1>
+            <div id="image-texte">
+                <h1></h1>
+                <p id="auteur"></p>
+            </div>
+        </div>
+
+        <div id="description">
+            <p id="description-texte"></p>
         </div>
 
         <div id="infos">
-            <div class="info">
-                <img src="assets/icones/categorie.svg" alt="🍽️">
-                <span>Plat</span>
-            </div>
-            <div class="info">
-                <img src="assets/icones/difficulte.svg" alt="⚡">
-                <span>Facile</span>
-            </div>
-            <div class="info">
-                <img src="assets/icones/prix.svg" alt="🪙">
-                <span>2€ / pers.</span>
-            </div>
-            <div class="info">
-                <img src="assets/icones/toque.svg" alt="⏱️">
-                <span>15 min</span>
-                <span class="plus">+</span>
-                <img src="assets/icones/four.svg" alt="🔥">
-                <span>30 min</span>
-            </div>
-            <div class="info">
-                <img src="assets/icones/etoile_rose.svg" alt="⭐">
-                <span>4.8/5</span>
-            </div>
         </div>
 
         <h2>Ingrédients</h2>
@@ -74,50 +63,11 @@
         </div>
 
         <div id="ingredients">
-            <div class="ingredient">
-                <img src="assets/ingredients/pate_pizza.png" alt="">
-                <p class="ingredient-nom">Pâte à pizza</p>
-                <p class="ingredient-quantite">1</p>
-            </div>
-            <div class="ingredient">
-                <img src="assets/ingredients/tomate.png" alt="">
-                <p class="ingredient-nom">Tomates</p>
-                <p class="ingredient-quantite">2</p>
-            </div>
-            <div class="ingredient">
-                <img src="assets/ingredients/mozzarella.png" alt="">
-                <p class="ingredient-nom">Mozzarella</p>
-                <p class="ingredient-quantite">1</p>
-            </div>
         </div>
 
         <h2>Recette</h2>
 
         <div id="etapes">
-            <div class="etape">
-                <p class="etape-num">1</p>
-                <p class="etape-desc">Préchauffez votre four à 240°C</p>
-            </div>
-            <div class="etape">
-                <p class="etape-num">2</p>
-                <p class="etape-desc">Étaler la pâte à pizza sur un plan de travail fariné en formant un disque régulier, en laissant les bords un peu plus épais.</p>
-            </div>
-            <div class="etape">
-                <p class="etape-num">3</p>
-                <p class="etape-desc">Napper le fond de la pâte avec la sauce tomate, en évitant les rebords.</p>
-            </div>
-            <div class="etape">
-                <p class="etape-num">4</p>
-                <p class="etape-desc">Disposer la mozzarella coupée en morceaux ou en lanières, puis ajouter les feuilles de basilic.</p>
-            </div>
-            <div class="etape">
-                <p class="etape-num">5</p>
-                <p class="etape-desc">Verser un filet d'huile d'olive et ajouter une pincée de sel.</p>
-            </div>
-            <div class="etape">
-                <p class="etape-num">6</p>
-                <p class="etape-desc">Enfourner pendant 7 à 10 minutes selon la puissance de votre four, jusqu'à ce que la croûte soit dorée et le fromage bien fondu.</p>
-            </div>
         </div>
 
 
@@ -129,14 +79,16 @@
                 <img src="assets/logo/logo_blanc.png">
             </div>
             <div id="footer-droite">
-                <a href="todo">
-                    <p>ToDo</p>
-                </a>
+                <p><a href="todo">ToDo</a> / <span id="darkmode">Dark Mode</span></p>
             </div>
         </div>
         
     </div>
 
     <script src="/script/recipe.js"></script>
+    <script src="/script/darkmode.js"></script>
+
+    <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js"></script> 
+    <script>new Lenis({ autoRaf: true, autoToggle: true, anchors: true, allowNestedScroll: true, naiveDimensions: true, stopInertiaOnNavigate: true })</script>
 </body>
 </html>

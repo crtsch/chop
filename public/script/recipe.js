@@ -4,17 +4,11 @@ async function initEtapesCheck() {
     const etapes = document.getElementsByClassName('etape');
     Array.from(etapes).forEach((etape) => {
         etape.addEventListener('click', (e) => {
-            if(etape.children[1].style.textDecoration == 'line-through') {
-                etape.style.backgroundColor = '';
-                etape.children[0].style.backgroundImage = 'linear-gradient(to right, rgba(var(--accent), 1) 0%, rgba(var(--accent), 0) 80%)';
-                etape.children[0].style.color = 'rgb(var(--bg))';
-                etape.children[1].style.textDecoration = 'none';
+            if(etape.classList.contains('etape-verte')) {
+                etape.classList.remove('etape-verte');
             }
             else {
-                etape.style.backgroundColor = '#e2f6e5';
-                etape.children[0].style.backgroundImage = 'linear-gradient(to right, rgb(29, 165, 11) 0%, #e2f6e5 80%)';
-                etape.children[0].style.color = '#e2f6e5';
-                etape.children[1].style.textDecoration = 'line-through';
+                etape.classList.add('etape-verte');
             }
         })
     })
@@ -27,11 +21,11 @@ async function initIngredientCheck() {
     const ingredientsListe = document.getElementsByClassName('ingredient');
     Array.from(ingredientsListe).forEach((ingredient) => {
         ingredient.addEventListener('click', (e) => {
-            if(ingredient.style.backgroundColor == '' || ingredient.style.backgroundColor == 'rgb(var(--bg))') {
-                ingredient.style.backgroundColor = '#e2f6e5';
+            if(ingredient.classList.contains('etape-verte')) {
+                ingredient.classList.remove('etape-verte');
             }
             else {
-                ingredient.style.backgroundColor = '';
+                ingredient.classList.add('etape-verte');
             }
         })
     })
@@ -90,6 +84,9 @@ async function renderRecette(recipe, ingredients) {
                       linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5)) 100%,
                       url(../assets/recettes-cover/${recipe.image})`;
     image.querySelector('h1').innerText = recipe.title;
+    document.getElementById('auteur').innerText = recipe.author;
+
+    document.getElementById('description-texte').innerText = recipe.description;
 
     const infos = document.getElementById('infos');
     infos.innerHTML = '';
@@ -167,9 +164,12 @@ async function renderRecette(recipe, ingredients) {
 
 
 
-fetch(`/api/r?r=${encodeURIComponent(r)}`).then(response => response.json()).then(data => {
-    recipe = data.recipe;
-    ingredients = data.ingredients;
-    quantites = ingredients.map(ing => ing.quantity);
-    renderRecette(recipe, ingredients);
-});
+fetch(`/api/r?r=${encodeURIComponent(r)}`)
+    .then(response => response.json())
+    .then(async (data) => {
+        recipe = data.recipe;
+        ingredients = data.ingredients;
+        quantites = ingredients.map(ing => ing.quantity);
+        await renderRecette(recipe, ingredients);
+        await updateDarkMode();
+    });

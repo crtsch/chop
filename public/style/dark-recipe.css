@@ -1,0 +1,64 @@
+.dark #image {
+    box-shadow: 0 5px 30px rgba(var(--dark-shadow), 0.17);
+}
+
+.dark #description-texte {
+    color: rgb(var(--dark-text-secondary));
+}
+
+.dark #infos {
+    border: 2px solid rgb(var(--dark-accent));
+}
+
+.dark .info {
+    border-right: none;
+}
+
+.dark .info:last-child {
+    border-right: none;
+}
+
+.dark #quantity-selector {
+    border: 2px solid rgb(var(--dark-accent));
+}
+
+.dark #quantity-moins, .dark #quantity-plus {
+    color: rgb(var(--dark-accent));
+}
+
+.dark #quantity-moins:hover {
+    background: linear-gradient(to right, rgba(var(--dark-accent), 0.2), rgba(var(--dark-accent), 0));
+}
+
+.dark #quantity-plus:hover {
+    background: linear-gradient(to left, rgba(var(--dark-accent), 0.2), rgba(var(--dark-accent), 0));
+}
+
+.dark .ingredient {
+    background-color: rgb(var(--dark-bg));
+    box-shadow: 0 5px 30px rgba(var(--dark-shadow), 0.17);
+}
+
+.dark .ingredient-quantite {
+    color: rgb(var(--dark-text-secondary))
+}
+
+.dark .etape-num {
+    color: rgb(var(--dark-bg));
+    background-image: linear-gradient(to right, rgba(var(--dark-accent), 1) 0%, rgba(var(--dark-accent), 0) 80%);
+}
+
+.dark .etape-verte {
+    background-color: rgb(var(--dark-vert-fond));
+}
+
+.dark .etape-verte .etape-num {
+    background-image: linear-gradient(to right, rgb(29, 165, 11) 0%, rgb(var(--dark-vert-fond)) 80%);
+    color: rgb(var(--dark-vert-fond));
+}
+
+@media (min-width: 768px) {
+    .etape:hover {
+        box-shadow: 0 5px 30px rgba(var(--dark-shadow), 0.17);
+    }
+}

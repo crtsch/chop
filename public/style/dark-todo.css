@@ -1,0 +1,23 @@
+.dark h1 {
+    background-color: rgb(var(--dark-accent));
+}
+
+.dark #taches li::marker {
+  color: rgb(var(--dark-accent));
+}
+
+.dark .cat {
+    color: rgb(var(--dark-accent))
+}
+
+.dark #retour-btn {
+    border: 2px solid rgb(var(--dark-accent));
+    background-color: rgb(var(--dark-bg));
+    color: rgb(var(--dark-accent));
+}
+
+.dark #retour-btn:hover {
+    background-color: rgb(var(--dark-accent));
+    color: rgb(var(--dark-bg));
+    box-shadow: 0 5px 30px rgba(var(--dark-shadow), 0.3);
+}

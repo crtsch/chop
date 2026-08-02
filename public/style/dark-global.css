@@ -1,0 +1,31 @@
+.dark body {
+    background-color: rgb(var(--dark-bg));
+    color: rgb(var(--dark-text-primary));
+}
+
+.dark #recherche-input {
+    background-color: rgb(var(--dark-secondary));
+    border: 1px solid rgba(var(--dark-shadow), 0.2);
+    color: rgb(var(--dark-text-primary));
+    border-right: none;
+}
+
+.dark #recherche-input::placeholder {
+    color: rgb(var(--dark-text-secondary));
+}
+
+.dark #recherche-btn {
+    background-color: rgb(var(--dark-secondary));
+    border: 1px solid rgba(var(--dark-shadow), 0.2);
+    border-left: none;
+}
+
+.dark .filter {
+    background-color: rgb(var(--dark-secondary));
+    color: rgb(var(--dark-text-secondary));
+    border: 1px solid rgba(var(--dark-shadow), 0.2);
+}
+
+.dark #footer {
+    background-color: rgb(var(--dark-accent));
+}

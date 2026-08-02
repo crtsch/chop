@@ -16,7 +16,7 @@ async function recetteSynthese(r) {
 
 async function putNote(r) {
     if (r.note) {
-        return `<span class="recette-note">&#9733; ${r.note}/5</span>`;
+        return `<span class="recette-note">&#9733;&#160;${r.note}/5</span>`;
     }
     return '';
 }

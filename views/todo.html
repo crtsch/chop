@@ -4,39 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo | CHOP</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.25/dist/lenis.css">
     <link rel="stylesheet" href="/style/global.css">
     <link rel="stylesheet" href="/style/todo.css">
+    <link rel="stylesheet" href="/style/dark-global.css">
+    <link rel="stylesheet" href="/style/dark-todo.css">
+    <link rel="icon" type="image/png" href="/assets/logo/logo_fond_o.png">
 </head>
 <body>
     <div id="content">
         <h1>ToDo</h1>
         <div id="taches">
             <ul id="taches-a-faire">
-                <li><span class="cat">[Contenu]</span> Auteur et description sur la page de recette</li>
-                <li><span class="cat">[UI]</span> Uniformiser les paddings et marges</li>
-                <li><span class="cat">[UI]</span> Fix du check des étapes sur mobile</li>
-                <li><span class="cat">[UI]</span> Fix de la taille des cartes sur la liste des recettes</li>
-                <li><span class="cat">[UI]</span> Mieux gérer les cartes des ingrédients</li>
-                <li><span class="cat">[UI]</span> Dark mode</li>
-                <li><span class="cat">[Fonctionnalité]</span> Quantités des ingrédients</li>
-                <li><span class="cat">[Fonctionnalité]</span> Modification des quantités</li>
-                <li><span class="cat">[Fonctionnalité]</span> Filtres de recherche</li>
-                <li><b><span class="cat">[Fonctionnalité]</span> Ajouter et modifier les recettes</b></li>
+                <li><span class="cat">[Système]</span> <span class="tache">Docker</span></li>
+                <li><span class="cat">[UI]</span> <span class="tache">Fix de la taille des cartes sur la liste des recettes</span></li>
+                <li><span class="cat">[Fonctionnalité]</span> <span class="tache">Afficher les quantités des ingrédients dans la fiche recette</span></li>
+                <li><span class="cat">[Fonctionnalité]</span> <span class="tache">Modifier les quantités (+/-)</span></li>
+                <li><span class="cat">[Fonctionnalité]</span> <span class="tache">Partager les recettes</span></li>
+                <li><span class="cat">[Fonctionnalité]</span> <span class="tache">Exporter/imprimer les recettes</span></li>
+                <li><span class="cat">[Fonctionnalité]</span> <span class="tache">Tooltips des ingrédients (références directes dans l'étape)</span></li>
+                <li><span class="cat">[Fonctionnalité]</span> <span class="tache">Filtres de recherche</span></li>
+                <li><span class="cat">[UI]</span> <span class="tache">Adapter la couleur des svg (dark mode)</span></li>
+                <li><b><span class="cat">[Fonctionnalité]</span> <span class="tache">Ajouter, supprimer et modifier les recettes</span></b></li>
+                <li><b><span class="cat">[Fonctionnalité]</span> <span class="tache">Importer des recettes d'autres sites</span></b></li>
+                <li><span class="cat">[Fonctionnalité]</span> <span class="tache">Créer des listes de courses</span></li>
             </ul>
             <br>
             <ul id="taches-faites">
-                <li><span class="cat">[Navigation]</span> Accueil avec liste dynamique des recettes</li>
-                <li><span class="cat">[Navigation]</span> Ouverture d'une fiche recette depuis la liste</li>
-                <li><span class="cat">[Contenu]</span> Affichage des informations de recette (catégorie, difficulté, prix, temps, note)</li>
-                <li><span class="cat">[Contenu]</span> Chargement des ingrédients depuis la base de données</li>
-                <li><span class="cat">[Contenu]</span> Chargement des étapes depuis la base de données</li>
-                <li><span class="cat">[UI]</span> Clic pour barrer une étape sur la fiche recette</li>
-                <li><span class="cat">[UI]</span> Clic pour surligner un ingrédient sur la fiche recette</li>
+                <li><span class="cat">[Navigation]</span> <span class="tache-faite">Accueil avec liste des recettes</span></li>
+                <li><span class="cat">[Contenu]</span> <span class="tache-faite">Affichage des informations de recette</span></li>
+                <li><span class="cat">[Contenu]</span> <span class="tache-faite">Chargement des ingrédients et étapes depuis la base de données</span></li>
+                <li><span class="cat">[UI]</span> <span class="tache-faite">Clic pour barrer une étape sur la fiche recette</span></li>
+                <li><span class="cat">[UI]</span> <span class="tache-faite">Clic pour barrer un ingrédient sur la fiche recette</span></li>
+                <li><span class="cat">[UI]</span> <span class="tache-faite">Fix du check des étapes sur mobile</span></li>
+                <li><span class="cat">[UI]</span> <span class="tache-faite">Fix des hover de recipe sur mobile (ingrédients et étapes)</span></li>
+                <li><span class="cat">[UI]</span> <span class="tache-faite">Fix du footer sur mobile</span></li>
+                <li><span class="cat">[Contenu]</span> <span class="tache-faite">Auteur et description sur la page de recette</span></li>
+                <li><span class="cat">[UI]</span> <span class="tache-faite">Uniformiser les paddings et marges</span></li>
+                <li><span class="cat">[UI]</span> <span class="tache-faite">Dark mode</span></li>
+                <li><span class="cat">[UX]</span> <span class="tache-faite">Smooth scrolling</span></li>
+                <li><span class="cat">[UI]</span> <span class="tache-faite">Mieux gérer les cartes des ingrédients</span></li>
             </ul>
         </div>
-        <a href="/">
-            <button id="retour-btn"><span id="fleche">←</span> Accueil</button>
-        </a>
+        <button id="retour-btn" onclick="window.history.back()"><span id="fleche">←</span> Retour</button>
     </div>
+
+    <script src="/script/darkmode.js"></script>
+
+    <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js"></script> 
+    <script>new Lenis({ autoRaf: true, autoToggle: true, anchors: true, allowNestedScroll: true, naiveDimensions: true, stopInertiaOnNavigate: true })</script>
+    
 </body>
 </html>
