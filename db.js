@@ -22,6 +22,8 @@ export async function initDB() {
             rest_time       INTEGER,
             cook_time       INTEGER,
             note            DECIMAL(2,1),
+            servings        INTEGER             NOT NULL,
+            servings_unit   TEXT                NOT NULL,
             difficulty      TEXT,
             steps           TEXT[]              NOT NULL
         );
@@ -36,7 +38,8 @@ export async function initDB() {
             recipe_id       INTEGER             NOT NULL,
             ingredient_id   INTEGER             NOT NULL,
             quantity        INTEGER             NOT NULL,
-            unit            TEXT                NOT NULL DEFAULT '',
+            unit            TEXT,
+            unit_long       TEXT,
             PRIMARY KEY (recipe_id, ingredient_id)
         )`);
 };

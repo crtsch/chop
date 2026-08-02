@@ -41,7 +41,7 @@ app.get('/api/r', async (req, res) => {
     }
 
     const ingredients = await db.all(
-        `SELECT i.id, i.name, i.image, ri.quantity, ri.unit
+        `SELECT i.id, i.name, i.image, ri.quantity, ri.unit, ri.unit_long
          FROM recipe_ingredients ri
          JOIN ingredients i ON i.id = ri.ingredient_id
          WHERE ri.recipe_id = ?`,

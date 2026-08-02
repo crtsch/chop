@@ -54,11 +54,39 @@
         <div id="infos">
         </div>
 
+        <div id="imprimer-partager">
+            <button id="imprimer-btn" onclick="window.print()">Imprimer</button>
+            <button id="partager-btn">Partager</button>
+        </div>
+        
+        <div id="share-modal-container">
+            <div id="share-modal" class="modal">
+                <div id="modal-content">
+                    <button id="close-btn" aria-label="Fermer le popup" type="button">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M6 6L18 18" />
+                            <path d="M18 6L6 18" />
+                        </svg>
+                    </button>
+                    <h3>Partager cette recette</h3>
+                    <div id="social-btns">
+                        <button id="mail-btn" class="social-btn">E-mail</button>
+                        <button id="whatsapp-btn" class="social-btn">WhatsApp</button>
+                        <button id="pinterest-btn" class="social-btn">Pinterest</button>
+                    </div>
+                    <div id="share-link">
+                        <input type="text" id="share-url" readonly>
+                        <button id="share-url-btn">Copier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h2>Ingrédients</h2>
         
         <div id="quantity-selector">
             <button id="quantity-moins">–</button>
-            <p id="quantity-val">4 personnes</p>
+            <p id="quantity-val"></p>
             <button id="quantity-plus">+</button>
         </div>
 

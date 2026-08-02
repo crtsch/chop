@@ -1,53 +1,62 @@
 #liste {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: stretch;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 340px));
     justify-content: center;
-    gap: 30px;
+    align-items: stretch;
+    gap: 28px;
     margin: 30px 0;
 }
 
 #liste > a {
     display: flex;
+    width: 100%;
 }
 
 .recette {
-    max-width: 350px;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     border-radius: 20px;
+    overflow: hidden;
     background-color: rgb(var(--bg));
     box-shadow: 0 5px 30px rgba(var(--shadow), 0.17);
 }
 
-.recette img {
-    width: 100%;
-    border-radius: 20px 20px 0 0;
+.recette-image {
     aspect-ratio: 21 / 9;
+    overflow: hidden;
+    background-color: rgb(var(--secondary));
+}
+
+.recette-image img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
 .recette-details {
     flex: 1;
-    padding: 10px 20px 20px;
+    padding: 16px 20px 18px;
     display: flex;
     flex-direction: column;
     min-height: 0;
-    gap: 10px;
+    gap: 12px;
 }
 
 .recette-titre {
     color: rgb(var(--accent));
     font-size: 20px;
+    line-height: 1.1;
 }
 
 .recette-note {
     color: rgb(var(--text-secondary));
-    font-size: 15px;
+    font-size: 0.78em;
     font-weight: 500;
-    margin-left: 5px;
+    margin-left: 6px;
+    white-space: nowrap;
 }
 
 .note-etoile {
@@ -61,22 +70,39 @@
 .recette-description {
     flex: 1;
     color: rgb(var(--text-secondary));
-    line-height: 1.4;
+    line-height: 1.45;
     overflow: hidden;
     min-height: 0;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     line-clamp: 2;
     -webkit-line-clamp: 2;
-    max-height: calc(2 * 1.4em);
+    max-height: calc(2 * 1.45em);
 }
 
 .recette-synthese {
     color: rgba(var(--accent), 0.5);
     font-size: 14px;
     text-align: center;
+    line-height: 1.35;
+    margin-top: auto;
+    min-height: 2.7em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .recette:hover {
-    transform: scale(1.02);
+    transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+    #liste {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+    }
+
+    .recette-details {
+        padding: 14px 16px 16px;
+    }
 }

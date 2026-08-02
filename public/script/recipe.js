@@ -1,3 +1,5 @@
+let recipeTitle = "";
+
 // Etape faite
 
 async function initEtapesCheck() {
@@ -41,11 +43,13 @@ const r = params.get('r');
 let recipe = null;
 let ingredients = [];
 let quantites = [];
-let k = 0;
+let baseServings = 0;
+let recetteEtapes = [];
 
 const ingredientsContainer = document.getElementById('ingredients');
 const etapesContainer = document.getElementById('etapes');
-let recetteEtapes = [];
+const image = document.getElementById('image');
+const infos = document.getElementById('infos');
 
 
 async function ajouterIngredient(ingredient) {
@@ -59,7 +63,7 @@ async function ajouterIngredient(ingredient) {
     ingredientNom.innerText = ingredient.name;
     const ingredientQuantite = document.createElement('p');
     ingredientQuantite.classList.add('ingredient-quantite');
-    ingredientQuantite.innerText = `? ??`;
+    ingredientQuantite.innerText = `${ingredient.quantity} ${ingredient.unit}`;
     ingredientCarte.appendChild(ingredientImg);
     ingredientCarte.appendChild(ingredientNom);
     ingredientCarte.appendChild(ingredientQuantite);
@@ -79,7 +83,6 @@ async function ajouterEtape(i) {
 async function renderRecette(recipe, ingredients) {
     document.title = `${recipe.title} | CHOP`;
     
-    const image = document.getElementById('image');
     image.style.background = `linear-gradient(rgba(var(--accent), 0.1) 50%, rgba(var(--accent), 0.6) 100%),
                       linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5)) 100%,
                       url(../assets/recettes-cover/${recipe.image})`;
@@ -88,7 +91,6 @@ async function renderRecette(recipe, ingredients) {
 
     document.getElementById('description-texte').innerText = recipe.description;
 
-    const infos = document.getElementById('infos');
     infos.innerHTML = '';
     if(recipe.category) {
         infos.innerHTML += `
@@ -134,16 +136,19 @@ async function renderRecette(recipe, ingredients) {
             <img src="assets/icones/four.svg" alt="🔥">
             <span>${recipe.cook_time} min</span>`;
     };
-    time += '</div>';
-    infos.innerHTML += time;
-
     if(recipe.note) {
-        infos.innerHTML += `
+        time += `
             <div class="info">
                 <img src="assets/icones/etoile_rose.svg" alt="⭐">
                 <span>${recipe.note}/5</span>
             </div>`;
     };
+    time += '</div>';
+    infos.innerHTML += time;
+
+    baseServings = recipe.servings;
+    document.getElementById('quantity-val').innerText = `${recipe.servings} ${recipe.servings_unit}`;
+
 
     ingredientsContainer.innerHTML = '';
     for(const ing of ingredients) {
@@ -164,12 +169,78 @@ async function renderRecette(recipe, ingredients) {
 
 
 
+// Modifier les quantités
+
+async function updateQuantites() {
+    const ingredientsListe = document.getElementsByClassName('ingredient');
+    const currentServings = document.getElementById('quantity-val').innerText.split(' ')[0];
+    Array.from(ingredientsListe).forEach((ingredient, index) => {
+        const ingredientQuantite = ingredient.querySelector('.ingredient-quantite');
+        ingredientQuantite.innerText = `${(currentServings / baseServings) * ingredients[index].quantity} ${ingredients[index].unit}`;
+    });
+}
+
+
+// Popup de partage
+
+document.getElementById('share-url').value = window.location.href;
+
+document.getElementById('partager-btn').addEventListener('click', (e) => {
+    document.getElementById('share-modal-container').style.display ='flex';
+})
+
+document.getElementById('close-btn').addEventListener('click', (e) => {
+    document.getElementById('share-modal-container').style.display ='none';
+})
+
+document.getElementById('share-url-btn').addEventListener('click', (e) => {
+    navigator.clipboard.writeText(window.location.href);
+    document.getElementById('share-modal-container').style.display ='none';
+})
+
+document.getElementById('mail-btn').addEventListener('click', (e) => {
+    window.open(`mailto:?subject=Recette%20Chop%20${recipeTitle}&body=Regarde%20cette%20recette%20trouv%C3%A9e%20sur%20Chop%20%3A%20${recipeTitle}%20${window.location.href}%20!`, '_blank').focus();
+    document.getElementById('share-modal-container').style.display ='none';
+});
+
+document.getElementById('whatsapp-btn').addEventListener('click', (e) => {
+    window.open(`https://api.whatsapp.com/send/?text=${window.location.href}&type=custom_url&app_absent=0`, '_blank').focus();
+    document.getElementById('share-modal-container').style.display ='none';
+})
+
+document.getElementById('pinterest-btn').addEventListener('click', (e) => {
+    window.open(`https://fr.pinterest.com/pin/create/button/?url=${window.location.href}&description=${recipeTitle}&is_video=true&media=${window.getComputedStyle(document.getElementById('image'), false).backgroundImage.slice(4, -1).replace(/"/g, "").split(', url(')[1]}`, '_blank').focus();
+    document.getElementById('share-modal-container').style.display ='none';
+})
+
+
+
+// Fetch et events
+
+
 fetch(`/api/r?r=${encodeURIComponent(r)}`)
     .then(response => response.json())
     .then(async (data) => {
         recipe = data.recipe;
         ingredients = data.ingredients;
-        quantites = ingredients.map(ing => ing.quantity);
+        recipeTitle = recipe.title;
         await renderRecette(recipe, ingredients);
         await updateDarkMode();
     });
+
+
+document.getElementById('quantity-moins').addEventListener('click', async () => {
+    const quantityVal = document.getElementById('quantity-val');
+    const quantitesTexte = quantityVal.innerText.split(' ');
+    if(quantitesTexte[0] > 1) {
+        quantityVal.innerText = `${parseInt(quantitesTexte[0]) - 1} ${quantitesTexte[1]}`;
+    }
+    await updateQuantites();
+});
+
+document.getElementById('quantity-plus').addEventListener('click', async () => {
+    const quantityVal = document.getElementById('quantity-val');
+    const quantitesTexte = quantityVal.innerText.split(' ');
+    quantityVal.innerText = `${parseInt(quantitesTexte[0]) + 1} ${quantitesTexte[1]}`;
+    await updateQuantites();
+});

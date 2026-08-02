@@ -55,7 +55,7 @@ div {
     margin-right: 10px;
 }
 
-.tache-faite {
+#taches-faites .tache {
     color: green;
     text-decoration: line-through;
     font-style: italic;
