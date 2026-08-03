@@ -1,3 +1,10 @@
+const diff = ['facile', 'moyen', 'difficile'];
+
+function capitalize(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+
+
 let recipeTitle = "";
 
 // Etape faite
@@ -103,48 +110,56 @@ async function renderRecette(recipe, ingredients) {
         infos.innerHTML += `
             <div class="info">
                 <img src="assets/icones/difficulte.svg" alt="⚡">
-                <span>${recipe.difficulty}</span>
+                <span>${capitalize(diff[recipe.difficulty - 1])}</span>
             </div>`
     };
     if(recipe.price) {
         infos.innerHTML += `
             <div class="info">
                 <img src="assets/icones/prix.svg" alt="🪙">
-                <span>${recipe.price}</span>
+                <span>${"€".repeat(recipe.price)}</span>
             </div>`;
     };
-    var time = '<div class="info">';
+    var time = '<div class="info" id="info-time">';
     if(recipe.prep_time) {
         time += `
-            <img src="assets/icones/toque.svg" alt="⏱️">
-            <span>${recipe.prep_time} min</span>`;
+            <div class="info-time">
+                <img src="assets/icones/toque.svg" alt="⏱️">
+                <span>${recipe.prep_time} min</span>
+            </div>`;
     }
     else {
         time += `
-            <img src="assets/icones/toque.svg" alt="⏱️">
-            <span>0 min</span>`;
+            <div class="info-time">
+                <img src="assets/icones/toque.svg" alt="⏱️">
+                <span>0 min</span>
+            </div>`;
     };
     if(recipe.rest_time && recipe.rest_time > 0) {
         time += `
-            <span class="plus">+</span>
-            <img src="assets/icones/repos.svg" alt="😴">
-            <span>${recipe.rest_time} min</span>`;
+            <div class="info-time">
+                <span class="plus">+</span>
+                <img src="assets/icones/repos.svg" alt="😴">
+                <span>${recipe.rest_time} min</span>
+            </div>`;
     };
     if(recipe.cook_time && recipe.cook_time > 0) {
         time += `
-            <span class="plus">+</span>
-            <img src="assets/icones/four.svg" alt="🔥">
-            <span>${recipe.cook_time} min</span>`;
+            <div class="info-time">
+                <span class="plus">+</span>
+                <img src="assets/icones/four.svg" alt="🔥">
+                <span>${recipe.cook_time} min</span>
+            </div>`;
     };
+    time += '</div>';
+    infos.innerHTML += time;
     if(recipe.note) {
-        time += `
+        infos.innerHTML += `
             <div class="info">
                 <img src="assets/icones/etoile_rose.svg" alt="⭐">
                 <span>${recipe.note}/5</span>
             </div>`;
     };
-    time += '</div>';
-    infos.innerHTML += time;
 
     baseServings = recipe.servings;
     document.getElementById('quantity-val').innerText = `${recipe.servings} ${recipe.servings_unit}`;

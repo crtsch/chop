@@ -52,10 +52,65 @@ app.get('/api/r', async (req, res) => {
 })
 
 app.get('/recipes', async (req, res) => {
-    const db = await getDB();
-    const recettes = await db.all(`SELECT * FROM recipes`);
-    return res.status(200).json(recettes);
-})
+    try {
+        const db = await getDB();
+        let sql = 'SELECT * FROM recipes';
+        let params = [];
+        
+        const title = req.query.title;
+        const author = req.query.author;
+        const category = req.query.category;
+        const maxprice = req.query.maxprice;
+        const prep_time = req.query.prep_time;
+        const note = req.query.note;
+        const difficulty = req.query.difficulty;
+
+        if (title) {
+            sql += ' WHERE title LIKE ?';
+            params.push(`%${title}%`);
+        }
+
+        if (author) {
+            sql += (params.length ? ' AND ' : ' WHERE ') + 'author LIKE ?';
+            params.push(`%${author}%`);
+        }
+
+        if (category) {
+            sql += (params.length ? ' AND ' : ' WHERE ') + 'category = ?';
+            params.push(category);
+        }
+
+        if (maxprice) {
+            sql += (params.length ? ' AND ' : ' WHERE ') + 'maxprice <= ?';
+            params.push(maxprice);
+        }
+
+        if (prep_time) {
+            sql += (params.length ? ' AND ' : ' WHERE ') + 'prep_time = ?';
+            params.push(prep_time);
+        }
+
+        if (note) {
+            sql += (params.length ? ' AND ' : ' WHERE ') + 'note >= ?';
+            params.push(note);
+        }
+
+        if (difficulty) {
+            sql += (params.length ? ' AND ' : ' WHERE ') + 'difficulty <= ?';
+            params.push(difficulty);
+        }
+
+        console.log("SQL exécuté :", sql);
+        console.log("Paramètres :", params);
+
+        const rows = await db.all(sql, params);
+        res.json(rows);
+
+    } catch (err) {
+        console.error("Erreur SQL :", err.message);
+        res.status(500).json({ error: err.message });
+    }
+});
 
 app.get('/ingredients', async (req, res) => {
     const db = await getDB();

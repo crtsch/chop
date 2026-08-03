@@ -1,12 +1,18 @@
+const diff = ['facile', 'moyen', 'difficile'];
+
+function capitalize(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+
 const recettesContainer = document.getElementById('liste');
 
 async function recetteSynthese(r) {
     var res = `${r.category}`;
     if (r.difficulty) {
-        res += ` • ${r.difficulty}`;
+        res += ` • ${capitalize(diff[r.difficulty - 1])}`;
     }
     if (r.price) {
-        res += ` • ${r.price}`;
+        res += ` • ${"€".repeat(r.price)}`;
     }
     if (r.prep_time) {
         res += ` • ${r.prep_time} min`;

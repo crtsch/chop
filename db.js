@@ -17,14 +17,14 @@ export async function initDB() {
             slug            TEXT                NOT NULL UNIQUE,
             image           TEXT                NOT NULL DEFAULT 'default.png',
             category        TEXT                NOT NULL DEFAULT 'Autre',
-            price           TEXT,
+            price           INTEGER,
             prep_time       INTEGER,
             rest_time       INTEGER,
             cook_time       INTEGER,
             note            DECIMAL(2,1),
             servings        INTEGER             NOT NULL,
             servings_unit   TEXT                NOT NULL,
-            difficulty      TEXT,
+            difficulty      INTEGER,
             steps           TEXT[]              NOT NULL
         );
         
