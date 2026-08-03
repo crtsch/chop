@@ -11,7 +11,7 @@
 }
 
 .dark .info {
-    border-right: none;
+    border-right: 2px solid rgb(var(--dark-accent));
 }
 
 .dark .info:last-child {
@@ -57,8 +57,26 @@
     color: rgb(var(--dark-vert-fond));
 }
 
+.dark #imprimer-partager button {
+    background-color: rgb(var(--dark-bg));
+    color: rgb(var(--dark-accent));
+    border: 2px solid rgb(var(--dark-accent));
+}
+
+.dark #imprimer-partager button:hover {
+    background-color: rgb(var(--dark-accent));
+    color: rgb(var(--bg));
+    box-shadow: 0 5px 30px rgba(var(--dark-shadow), 0.17);
+}
+
 @media (min-width: 768px) {
     .etape:hover {
         box-shadow: 0 5px 30px rgba(var(--dark-shadow), 0.17);
+    }
+}
+
+@media (max-width: 1300px) {
+    .dark .info {
+        border-right: none;
     }
 }
