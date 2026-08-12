@@ -33,13 +33,97 @@
                     <img src="assets/icones/plus.svg" alt="Nouvelle recette">
                 </div>
             </div>
+
             <div id="filters">
-                <div class="filter" id="filter-type">Type v</div>
-                <div class="filter" id="filter-prix">Prix v</div>
-                <div class="filter" id="filter-duree">Durée v</div>
-                <div class="filter" id="filter-ingredients">Ingrédients v</div>
-                <div class="filter" id="filter-note">Note v</div>
+
+                <div class="filter" id="filter-authors">
+                    <button class="dropdown-btn" aria-expanded="false">
+                        <span class="dropdown-btn-text">Auteurs</span>
+                        <span class="dropdown-btn-arrow"></span>
+                    </button>
+                    <ul id="authors-select" class="dropdown-select hidden checkbox-list">
+                        <li class="default-option selected">Tous les auteurs</li>
+                    </ul>
+                </div>
+                
+                <div class="filter" id="filter-category">
+                    <button class="dropdown-btn" aria-expanded="false">
+                        <span class="dropdown-btn-text">Catégorie</span>
+                        <span class="dropdown-btn-arrow"></span>
+                    </button>
+                    <ul id="category-select" class="dropdown-select hidden">
+                        <li class="default-option selected">Toutes</li>
+                        <li>Entrées</li>
+                        <li>Plats</li>
+                        <li>Desserts</li>
+                        <li>Autres</li>
+                    </ul>
+                </div>
+
+                <div class="filter" id="filter-rating">
+                    <button class="dropdown-btn" aria-expanded="false">
+                        <span class="dropdown-btn-text">Note min.</span>
+                        <span class="dropdown-btn-arrow"></span>
+                    </button>
+                    <div class="dropdown-select hidden rating-dropdown">
+                        <div id="note-select" class="rating-container">
+                            <input type="range" id="rating-range" min="0" max="5" step="1" value="0">
+                            <span id="rating-value">Toutes les notes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter" id="filter-preptime">
+                    <button class="dropdown-btn" aria-expanded="false">
+                        <span class="dropdown-btn-text">Temps de prep. max.</span>
+                        <span class="dropdown-btn-arrow"></span>
+                    </button>
+                    <div class="dropdown-select hidden preptime-dropdown">
+                        <div id="note-select" class="preptime-container">
+                            <input type="range" id="preptime-range" min="0" max="5" step="1" value="0">
+                            <span id="preptime-value">Toutes durées</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter" id="filter-maxprice">
+                    <button class="dropdown-btn" aria-expanded="false">
+                        <span class="dropdown-btn-text">Prix max.</span>
+                        <span class="dropdown-btn-arrow"></span>
+                    </button>
+                    <div class="dropdown-select hidden maxprice-dropdown">
+                        <div id="note-select" class="maxprice-container">
+                            <input type="range" id="maxprice-range" min="0" max="5" step="1" value="0">
+                            <span id="maxprice-value">Tous les prix</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter" id="filter-ingredients">
+                    <button class="dropdown-btn" aria-expanded="false">
+                        <span class="dropdown-btn-text">Ingrédients</span>
+                        <span class="dropdown-btn-arrow"></span>
+                    </button>
+                    <ul id="ingredients-select" class="dropdown-select hidden checkbox-list">
+                        <li class="default-option selected">Tous les ingrédients</li>
+                    </ul>
+                </div>
+
+                <div class="filter" id="filter-difficulty">
+                    <button class="dropdown-btn" aria-expanded="false">
+                        <span class="dropdown-btn-text">Difficulté</span>
+                        <span class="dropdown-btn-arrow"></span>
+                    </button>
+                    <ul id="difficulty-select" class="dropdown-select hidden">
+                        <li class="default-option selected">Toutes</li>
+                        <li>Facile</li>
+                        <li>Moyen</li>
+                        <li>Difficile</li>
+                    </ul>
+                </div>
+
             </div>
+
         </div>
 
 

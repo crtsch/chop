@@ -442,7 +442,7 @@ h2 {
 
 @media (min-width: 768px) {
     .ingredient:hover {
-        transform: translateY(-15px);
+        transform: translateY(-10px);
     }
 
     .etape:hover {

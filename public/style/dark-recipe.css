@@ -69,6 +69,10 @@
     box-shadow: 0 5px 30px rgba(var(--dark-shadow), 0.17);
 }
 
+.dark #share-modal h3 {
+    color: rgb(var(--text-primary));
+}
+
 @media (min-width: 768px) {
     .etape:hover {
         box-shadow: 0 5px 30px rgba(var(--dark-shadow), 0.17);

@@ -57,22 +57,27 @@ app.get('/recipes', async (req, res) => {
         let sql = 'SELECT * FROM recipes';
         let params = [];
         
-        const title = req.query.title;
-        const author = req.query.author;
-        const category = req.query.category;
-        const maxprice = req.query.maxprice;
-        const prep_time = req.query.prep_time;
-        const note = req.query.note;
-        const difficulty = req.query.difficulty;
+        const title = req.query.title;              // OK
+        const authors = req.query.authors;            // --
+        const category = req.query.category;        // OK
+        const maxprice = req.query.maxprice;        // --
+        const prep_time = req.query.prep_time;      // --
+        const note = req.query.note;                // OK
+        const difficulty = req.query.difficulty;    // --
+        const ingredients = req.query.ingredients;  // OK
 
         if (title) {
             sql += ' WHERE title LIKE ?';
             params.push(`%${title}%`);
         }
 
-        if (author) {
-            sql += (params.length ? ' AND ' : ' WHERE ') + 'author LIKE ?';
-            params.push(`%${author}%`);
+        if (authors) {
+            const authorList = authors.split(',').map(a => a.trim());
+            if (authorList.length > 0) {
+                const placeholders = authorList.map(() => '?').join(', ');
+                sql += (params.length ? ' AND ' : ' WHERE ') + `author IN (${placeholders})`;
+                params.push(...authorList);
+            }
         }
 
         if (category) {
@@ -81,12 +86,12 @@ app.get('/recipes', async (req, res) => {
         }
 
         if (maxprice) {
-            sql += (params.length ? ' AND ' : ' WHERE ') + 'maxprice <= ?';
+            sql += (params.length ? ' AND ' : ' WHERE ') + 'price <= ?';
             params.push(maxprice);
         }
 
         if (prep_time) {
-            sql += (params.length ? ' AND ' : ' WHERE ') + 'prep_time = ?';
+            sql += (params.length ? ' AND ' : ' WHERE ') + 'prep_time <= ?';
             params.push(prep_time);
         }
 
@@ -96,12 +101,34 @@ app.get('/recipes', async (req, res) => {
         }
 
         if (difficulty) {
-            sql += (params.length ? ' AND ' : ' WHERE ') + 'difficulty <= ?';
+            sql += (params.length ? ' AND ' : ' WHERE ') + 'difficulty = ?';
             params.push(difficulty);
         }
 
-        console.log("SQL exécuté :", sql);
-        console.log("Paramètres :", params);
+        if (ingredients) {
+            const ingredientIds = ingredients.split(',').map(id => parseInt(id));
+
+            if (ingredientIds.length > 0) {
+                
+                const placeholders = ingredientIds.map(() => '?').join(', ');
+
+                sql += (params.length ? ' AND ' : ' WHERE ') + `
+                    id IN (
+                        SELECT recipe_id
+                        FROM recipe_ingredients 
+                        WHERE ingredient_id IN (${placeholders})
+                        GROUP BY recipe_id
+                        HAVING COUNT(DISTINCT ingredient_id) = ?
+                    )
+                `;
+
+                for (let i = 0; i < ingredientIds.length; i++) {
+                    params.push(ingredientIds[i]);
+                }
+                
+                params.push(ingredientIds.length);
+            }
+        }
 
         const rows = await db.all(sql, params);
         res.json(rows);

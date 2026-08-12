@@ -96,6 +96,143 @@
     transform: scale(1.03);
 }
 
+#filters {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px 0;
+}
+
+.filter {
+    background-color: rgb(var(--secondary));
+    color: rgba(var(--shadow), 0.5);
+    padding: 0;
+    border: 1px solid rgba(var(--shadow), 0.2);
+    border-radius: 9999px;
+    width: fit-content;
+    font-size: 12px;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.dropdown-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 5px 20px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    color: inherit;
+    cursor: pointer;
+}
+
+.dropdown-btn-arrow {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(var(--shadow), 0.5);
+    margin-left: 10px;
+}
+
+.dropdown-select {
+    position: fixed;
+    border: 1px solid rgba(var(--shadow), 0.17);
+    border-radius: 10px;
+    font-size: 12px;
+    background-color: rgb(var(--bg));
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+    box-shadow: 0 10px 25px rgba(var(--shadow), 0.17);
+    z-index: 99999;
+}
+
+.dropdown-select.hidden {
+    display: none;
+}
+
+.dropdown-select li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-select li.selected {
+  background-color: rgba(var(--shadow), 0.05);
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.dropdown-select li:hover, .dropdown-select li:focus {
+  background-color: rgba(var(--shadow), 0.05);
+  border-radius: 4px;
+}
+
+.filter.is-active {
+    background-color: rgb(var(--accent));
+    color: rgb(var(--bg));
+    border-color: rgb(var(--accent));
+}
+
+.filter.is-active .dropdown-btn-arrow {
+    border-top-color: rgb(var(--bg));
+}
+
+.rating-dropdown,
+.preptime-dropdown,
+.maxprice-dropdown {
+    padding: 15px !important;
+    width: 200px !important;
+}
+
+.rating-container,
+.preptime-container,
+.maxprice-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+}
+
+.rating-container input[type="range"],
+.preptime-container input[type="range"],
+.maxprice-container input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+}
+
+#rating-value,
+#preptime-value,
+#maxprice-value {
+    font-size: 13px;
+    font-weight: bold;
+    color: rgba(var(--shadow), 0.8);
+}
+
+.dropdown-select.checkbox-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.dropdown-select.checkbox-list li input[type="checkbox"] {
+    cursor: pointer;
+    pointer-events: none;
+}
+
+#ingredients-select {
+    max-height: 40vh;
+    overflow-y: scroll;
+}
+
 @media (max-width: 768px) {
     #liste {
         grid-template-columns: minmax(0, 1fr);
@@ -104,5 +241,10 @@
 
     .recette-details {
         padding: 14px 16px 16px;
+    }
+
+    #filters {
+        margin-top: 12px;
+        justify-content: flex-start;
     }
 }

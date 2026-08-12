@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
+@font-face {
+  font-family: "Unbounded";
+  src: url("../assets/font/Unbounded-VariableFont_wght.ttf")
+    format("truetype");
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
     --menu-height: 64px;
@@ -153,30 +159,6 @@ a {
 
 
 
-
-#filters {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    white-space: nowrap;
-    overflow-x: scroll;
-}
-
-.filter {
-    background-color: rgb(var(--secondary));
-    color: rgba(var(--shadow), 0.5);
-    padding: 5px 20px;
-    border: 1px solid rgba(var(--shadow), 0.2);
-    border-radius: 9999px;
-    width: fit-content;
-    font-size: 12px;
-}
-
-
-
 /* FOOTER */
 
 #footer {
@@ -255,10 +237,6 @@ a {
 
     #recherche {
         margin-top: 20px;
-    }
-
-    #filters {
-        margin-top: 12px;
     }
 
     #footer {
