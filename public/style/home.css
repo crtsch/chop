@@ -116,9 +116,12 @@
     border: 1px solid rgba(var(--shadow), 0.2);
     border-radius: 9999px;
     width: fit-content;
-    font-size: 12px;
     display: inline-block;
     flex-shrink: 0;
+}
+
+.dropdown-btn-text {
+    font-size: 14px;
 }
 
 .dropdown-btn {
@@ -128,7 +131,7 @@
     width: 100%;
     padding: 5px 20px;
     border: none;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
     color: inherit;
     cursor: pointer;
 }
@@ -200,9 +203,7 @@
     width: 100%;
 }
 
-.rating-container input[type="range"],
-.preptime-container input[type="range"],
-.maxprice-container input[type="range"] {
+input[type="range"] {
     width: 100%;
     cursor: pointer;
 }
@@ -231,6 +232,21 @@
 #ingredients-select {
     max-height: 40vh;
     overflow-y: scroll;
+}
+
+#ing-search {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgb(var(--accent));
+    padding: 5px;
+}
+
+#ing-search:focus {
+    outline: none;
+}
+
+#ing-search-li:hover {
+    background-color: transparent;
 }
 
 @media (max-width: 768px) {

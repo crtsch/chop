@@ -18,3 +18,42 @@
 .dark .recette-synthese {
     color: rgba(var(--dark-accent), 0.7);
 }
+
+.dark .filter {
+    background-color: rgb(var(--dark-secondary));
+    color: rgb(var(--dark-text-primary));
+    border: 1px solid rgba(var(--dark-shadow), 0.2);
+}
+
+.dark .dropdown-btn-arrow {
+    border-top: 6px solid rgba(var(--dark-shadow), 0.5);
+}
+
+.dark .dropdown-select {
+    border: 1px solid rgba(var(--dark-shadow), 0.17);
+    background-color: rgb(var(--dark-bg));
+    box-shadow: 0 10px 25px rgba(var(--dark-shadow), 0.17);
+}
+
+.dark .dropdown-select li.selected {
+  background-color: rgba(var(--dark-shadow), 0.05);
+}
+
+.dark .dropdown-select li:hover, .dark .dropdown-select li:focus {
+  background-color: rgba(var(--dark-shadow), 0.05);
+}
+
+.dark .filter.is-active {
+    background-color: rgb(var(--dark-accent));
+    border-color: rgb(var(--dark-accent));
+}
+
+.dark .filter.is-active .dropdown-btn-arrow {
+    border-top-color: rgb(var(--dark-bg));
+}
+
+.dark #rating-value,
+.dark #preptime-value,
+.dark #maxprice-value {
+    color: rgba(var(--dark-shadow), 0.8);
+}

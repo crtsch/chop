@@ -44,6 +44,11 @@ body {
     padding: 0;
 }
 
+*::selection {
+    background-color: rgb(var(--accent));
+    color: rgb(var(--bg))
+}
+
 #content {
     margin: 30px;
     width: 85vw;
@@ -130,11 +135,12 @@ a {
     background-color: rgb(var(--secondary));
     border: 1px solid rgba(var(--shadow), 0.2);
     border-right: none;
-    color: rgb(var(--shadow))
+    color: rgb(var(--shadow));
 }
 
 #recherche-input::placeholder {
     color: rgba(var(--shadow), 0.5);
+    font-size: 14px;
 }
 
 #recherche-input:focus {

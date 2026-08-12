@@ -51,6 +51,28 @@ async function creerCarte(r) {
     return carte;
 };
 
+
+
+const ingSearch = document.getElementById("ing-search");
+
+ingSearch.addEventListener('input', (e) => {
+  const ingOptions = document.getElementById('ingredients-select').querySelectorAll('li');
+  for (const ingOption of ingOptions) {
+    if (!ingOption.classList.contains('default-option') && !(ingOption.id == 'ing-search-li')) {
+      if(ingOption.innerText.toLowerCase().includes(ingSearch.value.toLowerCase())) {
+        ingOption.style.display = "flex";
+      }
+      else {
+        ingOption.style.display = "none";
+      }
+    }
+  }
+})
+
+
+
+
+
 // FILTRES
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -197,7 +219,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
-    // Ing et auteurs)
+    // Ing et auteurs
     const isCheckboxList = dropdown.classList.contains("checkbox-list");
     if (isCheckboxList) {
       dropdown.addEventListener("click", async (ev) => {
@@ -231,7 +253,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
-    // catégories et difficulté)
+    // catégories et difficulté
     const options = dropdown.querySelectorAll("li:not(.default-option)");
     const defaultOptionCat = dropdown.querySelector(".default-option");
     
