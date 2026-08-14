@@ -380,6 +380,42 @@ h2 {
 }
 
 
+/* TOOLTIP */
+
+.tooltip-ing {
+    border-bottom: 2px dashed rgb(var(--accent));
+    cursor: pointer;
+}
+
+.tooltip-ing:hover {
+    color: rgb(var(--accent));
+}
+
+#ing-tooltip-display {
+    padding: 15px;
+    border-radius: 15px;
+    background-color: rgb(var(--bg));
+    box-shadow: 0 5px 30px rgba(var(--shadow), 0.17);
+    position: fixed;
+    visibility: hidden;
+    transform: translate(-50%, -150%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#ing-tooltip-display p {
+    font-size: 12px;
+}
+
+#ing-tooltip-display h3 {
+    font-size: 14px;
+}
+
+
+
+
 /* RESPONSIVE */
 
 @media (max-width: 768px) {

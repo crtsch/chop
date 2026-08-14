@@ -62,6 +62,7 @@ const infos = document.getElementById('infos');
 async function ajouterIngredient(ingredient) {
     const ingredientCarte = document.createElement('div');
     ingredientCarte.classList.add('ingredient');
+    ingredientCarte.setAttribute('data-id', ingredient.id);
     const ingredientImg = document.createElement('img');
     ingredientImg.src = `assets/ingredients/${ingredient.image}`;
     ingredientImg.alt = ingredient.name;
@@ -78,11 +79,19 @@ async function ajouterIngredient(ingredient) {
 }
 
 
+async function ajouterTooltipsEtape(etape) {
+    const regex = /\[([^\]]+)\]\(([^)]+)\)/g; // capture [ingrédient](id)
+    return etape.replace(regex, (match, ing, id) => {
+        return `<span class="tooltip-ing" data-id="${id}">${ing}</span>`
+    })
+}
+
+
 async function ajouterEtape(i) {
     const etapeDiv = document.createElement('div');
     etapeDiv.classList.add('etape');
     etapeDiv.innerHTML = `<p class='etape-num'>${i+1}</p>
-                          <p class='etape-desc'>${recetteEtapes[i]}</p>`;
+                          <p class='etape-desc'>${await ajouterTooltipsEtape(recetteEtapes[i])}</p>`;
     return etapeDiv;
 }
 
@@ -230,32 +239,90 @@ document.getElementById('pinterest-btn').addEventListener('click', (e) => {
 
 
 
+// Tooltips ingrédients
+
+async function updateTooltip (ingredient, x, y) {
+    const tooltipDisplay = document.getElementById('ing-tooltip-display');
+    tooltipDisplay.querySelector('p').innerText = ingredient.querySelector('.ingredient-nom').innerText;
+    tooltipDisplay.querySelector('h3').innerText = ingredient.querySelector('.ingredient-quantite').innerText;
+    tooltipDisplay.style.top = y + 'px';
+    tooltipDisplay.style.left = x + 'px';
+    tooltipDisplay.style.visibility = 'visible';
+}
+
+async function initTooltips () {
+    const spanTooltips = document.getElementsByClassName('tooltip-ing');
+    const tooltipDisplay = document.getElementById('ing-tooltip-display');
+    const isHoverable = window.matchMedia('(hover: hover)').matches;
+
+    const ingredientsListe = Array.from(document.getElementsByClassName('ingredient'));
+
+    for (const spanTooltip of spanTooltips) {
+        const ingId = spanTooltip.getAttribute('data-id');
+        const correspondant = ingredientsListe.find(ing => ing.getAttribute('data-id') === ingId);
+
+        if (!correspondant) continue;
+
+        if (isHoverable) {
+            spanTooltip.addEventListener('mouseenter', async (e) => {
+                await updateTooltip(correspondant, e.clientX, e.clientY);
+            });
+
+            spanTooltip.addEventListener('mouseleave', () => {
+                tooltipDisplay.style.visibility = 'hidden';
+            });
+
+        } else {
+            spanTooltip.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                
+                if (tooltipDisplay.style.visibility === 'visible' && tooltipDisplay.dataset.currentId === ingId) {
+                    tooltipDisplay.style.visibility = 'hidden';
+                } else {
+                    await updateTooltip(correspondant, e.clientX, e.clientY);
+                    tooltipDisplay.dataset.currentId = ingId;
+                }
+            });
+        }
+    }
+
+    if (!isHoverable) {
+        document.addEventListener('click', (e) => {
+            tooltipDisplay.style.visibility = 'hidden';
+        });
+    }
+}
+
+
+
 // Fetch et events
 
-
-fetch(`/api/r?r=${encodeURIComponent(r)}`)
-    .then(response => response.json())
-    .then(async (data) => {
-        recipe = data.recipe;
-        ingredients = data.ingredients;
-        recipeTitle = recipe.title;
-        await renderRecette(recipe, ingredients);
-        await updateDarkMode();
+document.addEventListener('DOMContentLoaded', () => {
+    fetch(`/api/r?r=${encodeURIComponent(r)}`)
+        .then(response => response.json())
+        .then(async (data) => {
+            recipe = data.recipe;
+            ingredients = data.ingredients;
+            recipeTitle = recipe.title;
+            await updateDarkMode();
+            await renderRecette(recipe, ingredients);
+            await initTooltips();
+        });
+    
+    
+    document.getElementById('quantity-moins').addEventListener('click', async () => {
+        const quantityVal = document.getElementById('quantity-val');
+        const quantitesTexte = quantityVal.innerText.split(' ');
+        if(quantitesTexte[0] > 1) {
+            quantityVal.innerText = `${parseInt(quantitesTexte[0]) - 1} ${quantitesTexte[1]}`;
+        }
+        await updateQuantites();
     });
-
-
-document.getElementById('quantity-moins').addEventListener('click', async () => {
-    const quantityVal = document.getElementById('quantity-val');
-    const quantitesTexte = quantityVal.innerText.split(' ');
-    if(quantitesTexte[0] > 1) {
-        quantityVal.innerText = `${parseInt(quantitesTexte[0]) - 1} ${quantitesTexte[1]}`;
-    }
-    await updateQuantites();
-});
-
-document.getElementById('quantity-plus').addEventListener('click', async () => {
-    const quantityVal = document.getElementById('quantity-val');
-    const quantitesTexte = quantityVal.innerText.split(' ');
-    quantityVal.innerText = `${parseInt(quantitesTexte[0]) + 1} ${quantitesTexte[1]}`;
-    await updateQuantites();
-});
+    
+    document.getElementById('quantity-plus').addEventListener('click', async () => {
+        const quantityVal = document.getElementById('quantity-val');
+        const quantitesTexte = quantityVal.innerText.split(' ');
+        quantityVal.innerText = `${parseInt(quantitesTexte[0]) + 1} ${quantitesTexte[1]}`;
+        await updateQuantites();
+    });
+})

@@ -73,6 +73,23 @@
     color: rgb(var(--text-primary));
 }
 
+
+
+.tooltip-ing {
+    border-bottom: 2px dashed rgb(var(--dark-accent));
+}
+
+.tooltip-ing:hover {
+    color: rgb(var(--dark-accent));
+}
+
+#ing-tooltip-display {
+    background-color: rgb(var(--dark-bg));
+    box-shadow: 0 5px 30px rgba(var(--dark-shadow), 0.17);
+}
+
+
+
 @media (min-width: 768px) {
     .etape:hover {
         box-shadow: 0 5px 30px rgba(var(--dark-shadow), 0.17);
