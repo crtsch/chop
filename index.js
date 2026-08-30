@@ -22,6 +22,10 @@ app.get('/r', (req, res) => {
     res.sendFile(path.join(process.cwd(), 'views', 'recipe.html'));
 })
 
+app.get('/add', (req, res) => {
+    res.sendFile(path.join(process.cwd(), 'views', 'add.html'));
+})
+
 app.get('/todo', (req, res) => {
     res.sendFile(path.join(process.cwd(), 'views', 'todo.html'));
 })
@@ -57,14 +61,14 @@ app.get('/recipes', async (req, res) => {
         let sql = 'SELECT * FROM recipes';
         let params = [];
         
-        const title = req.query.title;              // OK
-        const authors = req.query.authors;            // --
-        const category = req.query.category;        // OK
-        const maxprice = req.query.maxprice;        // --
-        const prep_time = req.query.prep_time;      // --
-        const note = req.query.note;                // OK
-        const difficulty = req.query.difficulty;    // --
-        const ingredients = req.query.ingredients;  // OK
+        const title = req.query.title;
+        const authors = req.query.authors;
+        const category = req.query.category;
+        const maxprice = req.query.maxprice;
+        const prep_time = req.query.prep_time;
+        const note = req.query.note;
+        const difficulty = req.query.difficulty;
+        const ingredients = req.query.ingredients;
 
         if (title) {
             sql += ' WHERE title LIKE ?';

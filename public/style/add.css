@@ -1,0 +1,123 @@
+#add-form {
+    width: 60%;
+}
+
+h1, h2 {
+    text-align: center;
+    margin: 30px 0 10px 0;
+}
+
+#add-form input[type="text"], #add-form input[type="number"], #add-form select, #add-form input[type="file"] {
+    padding: 10px 20px;
+    background-color: rgb(var(--secondary));
+    border-radius: 9999px;
+    border: 1px solid rgba(var(--shadow), 0.2);
+    font-family: inherit;
+}
+
+#add-form input:focus {
+    outline: none;
+}
+
+#add-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0px;
+    align-items: center;
+}
+
+.input p {
+    margin-right: 20px;
+    min-width: fit-content;
+}
+
+.input input, .input select {
+    width: 100%;
+}
+
+.ingredient, .etape {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.ingredient input {
+    min-width: 0;
+}
+
+.ingredient-photo {
+    height: 2em;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+}
+
+.ingredient-nom {
+    flex: 3;
+}
+
+.ingredient-quantite, .ingredient-unite {
+    flex: 1;
+}
+
+#ajouter-ingredient, #ajouter-etape {
+    padding: 10px 20px;
+    border-radius: 9999px;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: rgb(var(--bg));
+    color: rgb(var(--accent));
+    border: 2px solid rgb(var(--accent));
+}
+
+#ajouter-ingredient:hover, #ajouter-etape:hover {
+    background-color: rgb(var(--accent));
+    color: rgb(var(--bg));
+}
+
+#ajouter-recette {
+    margin: 50px 0;
+    padding: 20px;
+    border-radius: 9999px;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: rgb(var(--accent));
+    color: rgb(var(--bg));
+    border: 2px solid rgb(var(--accent));
+}
+
+#ajouter-recette:hover {
+    box-shadow: 0 5px 30px rgba(var(--shadow), 0.3);
+}
+
+.etape-num {
+    font-size: xx-large;
+    font-weight: 900;
+    text-align: center;
+    color: rgb(var(--accent))
+}
+
+.etape-desc {
+    width: 100%;
+}
+
+.etape-suppr {
+    height: 100%;
+    padding: 10px;
+    aspect-ratio: 1 / 1;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    background-color: rgb(var(--accent));
+    color: rgb(var(--bg));
+    font-weight: 900;
+    cursor: pointer;
+}
