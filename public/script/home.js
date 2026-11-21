@@ -37,7 +37,7 @@ async function creerCarte(r) {
     carte.innerHTML = `
         <div class="recette">
             <div class="recette-image">
-                <img src="assets/recettes-cover/${r.image}" alt="${r.title}">
+                <img src="${r.imageUrl}" alt="${r.title}">
             </div>
             <div class="recette-details">
                     <h2 class="recette-titre">${r.title}

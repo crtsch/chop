@@ -1,3 +1,5 @@
 node_modules/
 .env
 db/
+public/assets/ingredients/
+public/assets/recettes-cover/

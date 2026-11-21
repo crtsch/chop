@@ -64,7 +64,7 @@ async function ajouterIngredient(ingredient) {
     ingredientCarte.classList.add('ingredient');
     ingredientCarte.setAttribute('data-id', ingredient.id);
     const ingredientImg = document.createElement('img');
-    ingredientImg.src = `assets/ingredients/${ingredient.image}`;
+    ingredientImg.src = `${ingredient.imageUrl}`;
     ingredientImg.alt = ingredient.name;
     const ingredientNom = document.createElement('p');
     ingredientNom.classList.add('ingredient-nom');
@@ -101,7 +101,7 @@ async function renderRecette(recipe, ingredients) {
     
     image.style.background = `linear-gradient(rgba(var(--accent), 0.1) 50%, rgba(var(--accent), 0.6) 100%),
                       linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5)) 100%,
-                      url(../assets/recettes-cover/${recipe.image})`;
+                      url(${recipe.imageUrl})`;
     image.querySelector('h1').innerText = recipe.title;
     document.getElementById('auteur').innerText = recipe.author;
 

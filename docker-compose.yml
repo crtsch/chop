@@ -8,8 +8,10 @@ services:
     restart: unless-stopped
     environment:
       - DB_PATH=/app/data/recipes.sqlite
+      - UPLOADS_PATH=/app/uploads
     volumes:
       - /opt/docker-data/chop/db:/app/data
+      - /opt/docker-data/chop/uploads:/app/uploads
     networks:
       - web
 

@@ -1,5 +1,6 @@
 import express from 'express';
 import {initDB, getDB} from './db.js';
+import fs from "node:fs";
 import path from 'path';
 
 const app = express();
@@ -7,6 +8,19 @@ const port = 3000;
 
 app.use(express.json());
 app.use(express.static('public'));
+
+const uploadPath = process.env.UPLOADS_PATH || path.join(process.cwd(), 'public', 'assets');
+const uploadsUrl = (process.env.UPLOADS_URL || '/uploads').replace(/\/+$/, '');
+
+const getImageUrl = (folder, filename) =>
+    `${uploadsUrl}/${folder}/${encodeURIComponent(filename || 'default.png')}`;
+
+fs.mkdirSync(path.join(uploadPath, "ingredients"), { recursive: true });
+fs.mkdirSync(path.join(uploadPath, "recettes-cover"), { recursive: true });
+
+app.use('/uploads', express.static(uploadPath));
+
+
 
 await initDB();
 
@@ -52,7 +66,16 @@ app.get('/api/r', async (req, res) => {
         [recipe.id]
     );
 
-    return res.status(200).json({ recipe, ingredients });
+    const recipeWithImage = {
+        ...recipe,
+        imageUrl: getImageUrl('recettes-cover', recipe.image)
+    };
+    const ingredientsWithImage = ingredients.map(ingredient => ({
+        ...ingredient,
+        imageUrl: getImageUrl('ingredients', ingredient.image)
+    }));
+
+    return res.status(200).json({ recipe: recipeWithImage, ingredients: ingredientsWithImage });
 })
 
 app.get('/recipes', async (req, res) => {
@@ -157,7 +180,16 @@ app.get('/recipes', async (req, res) => {
         }
 
         const rows = await db.all(sql, params);
-        res.json(rows);
+
+        const recipesWithImg = rows.map(row => {
+            const filename = row.image || 'default.png';
+            return {
+                ...row,
+                imageUrl: getImageUrl('recettes-cover', filename)
+            };
+        });
+
+        res.json(recipesWithImg);
 
     } catch (err) {
         console.error("Erreur SQL :", err.message);
@@ -166,9 +198,21 @@ app.get('/recipes', async (req, res) => {
 });
 
 app.get('/ingredients', async (req, res) => {
-    const db = await getDB();
-    const ingredients = await db.all(`SELECT * FROM ingredients`);
-    return res.status(200).json(ingredients);
+    try {
+        const db = await getDB();
+        const ingredients = await db.all(`SELECT * FROM ingredients`);
+        const ingredientsWithImg = ingredients.map(row => {
+            const filename = row.image || 'default.png';
+            return {
+                ...row,
+                imageUrl: getImageUrl('ingredients', filename)
+            };
+        });
+        return res.status(200).json(ingredientsWithImg);
+    } catch (err) {
+        console.error("Erreur SQL :", err.message);
+        res.status(500).json({ error: err.message });
+    }
 })
 
 app.get('/tags', async (req, res) => {
