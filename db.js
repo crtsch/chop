@@ -12,7 +12,9 @@ const dbPath = process.env.DB_PATH || path.join(__dirname, 'db', 'recipes.sqlite
 let dbInstance = null;
 
 export async function initDB() {
-
+    if (dbInstance) {
+        return dbInstance;
+    }
     fs.mkdirSync(path.dirname(dbPath), { recursive: true });
     dbInstance = await open({
         filename: dbPath,

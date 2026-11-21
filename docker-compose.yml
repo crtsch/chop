@@ -8,11 +8,11 @@ services:
     restart: unless-stopped
     networks:
       - web
-    app:
-      environment:
-        - DB_PATH=/app/data/recipes.sqlite
-      volumes:
-        - /opt/docker-data/chop/db:/app/data
+  app:
+    environment:
+      - DB_PATH=/app/data/recipes.sqlite
+    volumes:
+      - /opt/docker-data/chop/db:/app/data
 networks:
   web:
     external: true
