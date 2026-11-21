@@ -1,11 +1,21 @@
 import {open} from 'sqlite';
 import sqlite3 from 'sqlite3';
 
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const dbPath = process.env.DB_PATH || path.join(__dirname, 'db', 'recipes.sqlite');
 let dbInstance = null;
 
 export async function initDB() {
+
+    fs.mkdirSync(path.dirname(dbPath), { recursive: true });
     dbInstance = await open({
-        filename: 'db/recipes.sqlite',
+        filename: dbPath,
         driver: sqlite3.Database,
     });
     await dbInstance.exec(`CREATE TABLE IF NOT EXISTS recipes (
