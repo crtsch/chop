@@ -229,23 +229,27 @@ input[type="range"] {
     pointer-events: none;
 }
 
-#ingredients-select {
+#ingredients-select,
+#tags-select {
     max-height: 40vh;
     overflow-y: scroll;
 }
 
-#ing-search {
+#ing-search,
+#tag-search {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid rgb(var(--accent));
     padding: 5px;
 }
 
-#ing-search:focus {
+#ing-search:focus,
+#tag-search:focus {
     outline: none;
 }
 
-#ing-search-li:hover {
+#ing-search-li:hover,
+#tag-search-li:hover {
     background-color: transparent;
 }
 

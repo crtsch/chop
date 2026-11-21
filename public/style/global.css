@@ -94,17 +94,21 @@ a {
     justify-content: left;
 }
 
-#ajouter-btn {
+#darkmode-btn {
     justify-content: right;
 }
 
-#logo, #ajouter-btn {
+#darkmode-btn img {
+    cursor: pointer;
+}
+
+#logo, #darkmode-btn {
     width: 100%;
     height: 100%;
     flex: 1;
 }
 
-#logo img, #ajouter-btn img, #recherche input {
+#logo img, #darkmode-btn img, #recherche input {
     height: calc(var(--menu-height) * 0.6);
 }
 
@@ -227,7 +231,7 @@ a {
 
 @media (max-width: 768px) {
 
-    #ajouter-btn, #ajouter-btn img {
+    #darkmode-btn, #darkmode-btn img {
         display: none;
     }
 

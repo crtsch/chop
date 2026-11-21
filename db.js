@@ -41,7 +41,14 @@ export async function initDB() {
             unit            TEXT,
             unit_long       TEXT,
             PRIMARY KEY (recipe_id, ingredient_id)
-        )`);
+        );
+            
+        CREATE TABLE IF NOT EXISTS recipe_tags (
+            recipe_id       INTEGER             NOT NULL,
+            tag             TEXT                NOT NULL,
+            PRIMARY KEY (recipe_id, tag)
+        );
+    `);
 };
 
 export async function getDB() {

@@ -29,8 +29,8 @@
                         <img src="assets/icones/loupe.svg" alt="🔍">
                     </button>
                 </div>
-                <div id="ajouter-btn">
-                    <img src="assets/icones/plus.svg" alt="Nouvelle recette">
+                <div id="darkmode-btn">
+                    <img src="assets/icones/jour.svg" alt="Thème">
                 </div>
             </div>
 
@@ -123,6 +123,17 @@
                     </ul>
                 </div>
 
+                <div class="filter" id="filter-tags">
+                    <button class="dropdown-btn" aria-expanded="false">
+                        <span class="dropdown-btn-text">Tags</span>
+                        <span class="dropdown-btn-arrow"></span>
+                    </button>
+                    <ul id="tags-select" class="dropdown-select hidden checkbox-list">
+                        <li class="default-option selected">Tous les tags</li>
+                        <li id="tag-search-li"><input id="tag-search" type="text" placeholder="Rechercher"></li>
+                    </ul>
+                </div>
+
             </div>
 
         </div>
@@ -137,7 +148,7 @@
                 <img src="assets/logo/logo_blanc.png">
             </div>
             <div id="footer-droite">
-                <p><a href="todo">ToDo</a> / <span id="darkmode">Dark Mode</span></p>
+                <p><a href="todo">ToDo</a></p>
             </div>
         </div>
 

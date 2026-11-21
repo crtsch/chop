@@ -69,6 +69,7 @@ app.get('/recipes', async (req, res) => {
         const note = req.query.note;
         const difficulty = req.query.difficulty;
         const ingredients = req.query.ingredients;
+        const tags = req.query.tags;
 
         if (title) {
             sql += ' WHERE title LIKE ?';
@@ -134,6 +135,27 @@ app.get('/recipes', async (req, res) => {
             }
         }
 
+        if (tags) {
+            const tagNames = tags.split(',').map(tag => tag.trim()).filter(Boolean);
+
+            if (tagNames.length > 0) {
+                const placeholders = tagNames.map(() => '?').join(', ');
+
+                sql += (params.length ? ' AND ' : ' WHERE ') + `
+                    id IN (
+                        SELECT recipe_id
+                        FROM recipe_tags
+                        WHERE tag IN (${placeholders})
+                        GROUP BY recipe_id
+                        HAVING COUNT(DISTINCT tag) = ?
+                    )
+                `;
+
+                params.push(...tagNames);
+                params.push(tagNames.length);
+            }
+        }
+
         const rows = await db.all(sql, params);
         res.json(rows);
 
@@ -147,6 +169,12 @@ app.get('/ingredients', async (req, res) => {
     const db = await getDB();
     const ingredients = await db.all(`SELECT * FROM ingredients`);
     return res.status(200).json(ingredients);
+})
+
+app.get('/tags', async (req, res) => {
+    const db = await getDB();
+    const rows = await db.all(`SELECT DISTINCT tag FROM recipe_tags ORDER BY tag`);
+    return res.status(200).json(rows.map(({ tag }) => ({ id: tag, name: tag })));
 })
 
 app.get('/recipe_ingredients', async (req, res) => {

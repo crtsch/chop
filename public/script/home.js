@@ -69,6 +69,21 @@ ingSearch.addEventListener('input', (e) => {
   }
 })
 
+const tagSearch = document.getElementById("tag-search");
+
+tagSearch.addEventListener('input', (e) => {
+  const tagOptions = document.getElementById('tags-select').querySelectorAll('li');
+  for (const tagOption of tagOptions) {
+    if (!tagOption.classList.contains('default-option') && !(tagOption.id == 'tag-search-li')) {
+      if(tagOption.innerText.toLowerCase().includes(tagSearch.value.toLowerCase())) {
+        tagOption.style.display = "flex";
+      }
+      else {
+        tagOption.style.display = "none";
+      }
+    }
+  }
+})
 
 
 
@@ -115,6 +130,32 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (e) {
     console.error("Erreur chargement ingrédients", e);
   }
+
+  // idem pour les tags
+
+  try {
+    const response = await fetch('/tags');
+    const tags = await response.json();
+    
+    tags.sort((a, b) => {
+        let x = a.name.toLowerCase();
+        let y = b.name.toLowerCase();
+        return x < y ? -1 : x > y ? 1 : 0;
+    });
+
+    const tagsUl = document.getElementById('tags-select');
+    if (tagsUl) {
+      for (const tag of tags) {
+        const tagLi = document.createElement('li');
+        tagLi.innerHTML = `<input type="checkbox" value="${tag.id}"> ${capitalize(tag.name)}`;
+        tagsUl.appendChild(tagLi);
+      }
+    }
+  } catch (e) {
+    console.error("Erreur chargement tags", e);
+  }
+
+  ///
 
   const customSelects = document.querySelectorAll(".filter");
 
@@ -322,6 +363,9 @@ async function updateRecettes() {
   const fetchIngredients = document.querySelectorAll('#ingredients-select input[type="checkbox"]:checked');
   filtres.ingredients = Array.from(fetchIngredients).map(ing => ing.value);
 
+  const fetchTags = document.querySelectorAll('#tags-select input[type="checkbox"]:checked');
+  filtres.tags = Array.from(fetchTags).map(tag => tag.value);
+
   const fetchDifficulty = document.querySelector('#difficulty-select .selected');
   filtres.difficulty = fetchDifficulty && !fetchDifficulty.classList.contains('default-option') ? fetchDifficulty.textContent.trim().toLowerCase() : null;
 
@@ -334,6 +378,7 @@ async function updateRecettes() {
   if (filtres.maxprice > 0) params.append('maxprice', filtres.maxprice);
   if (filtres.authors.length > 0) params.append('authors', filtres.authors.join(','));
   if (filtres.ingredients.length > 0) params.append('ingredients', filtres.ingredients.join(','));
+  if (filtres.tags.length > 0) params.append('tags', filtres.tags.join(','));
   
   if (filtres.difficulty) {
     const diffMap = { 'facile': 1, 'moyen': 2, 'difficile': 3 };
