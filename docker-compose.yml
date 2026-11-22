@@ -9,7 +9,7 @@ services:
     environment:
       - DB_PATH=/app/data/recipes.sqlite
       - UPLOADS_PATH=/app/uploads
-      - UPLOADS-URL=/uploads
+      - UPLOADS_URL=/uploads
     volumes:
       - /opt/docker-data/chop/db:/app/data
       - /opt/docker-data/chop/uploads:/app/uploads

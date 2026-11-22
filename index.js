@@ -11,9 +11,22 @@ app.use(express.static('public'));
 
 const uploadPath = process.env.UPLOADS_PATH || path.join(process.cwd(), 'public', 'assets');
 const uploadsUrl = (process.env.UPLOADS_URL || '/uploads').replace(/\/+$/, '');
+const publicAssetsPath = path.join(process.cwd(), 'public', 'assets');
 
-const getImageUrl = (folder, filename) =>
-    `${uploadsUrl}/${folder}/${encodeURIComponent(filename || 'default.png')}`;
+const getImageUrl = (folder, filename) => {
+    const safeFilename = path.basename(filename || 'default.png');
+    const uploadFile = path.join(uploadPath, folder, safeFilename);
+    if (fs.existsSync(uploadFile)) {
+        return `${uploadsUrl}/${folder}/${encodeURIComponent(safeFilename)}`;
+    }
+
+    const publicAsset = path.join(publicAssetsPath, folder, safeFilename);
+    if (fs.existsSync(publicAsset)) {
+        return `/assets/${folder}/${encodeURIComponent(safeFilename)}`;
+    }
+
+    return `/assets/${folder}/default.png`;
+};
 
 fs.mkdirSync(path.join(uploadPath, "ingredients"), { recursive: true });
 fs.mkdirSync(path.join(uploadPath, "recettes-cover"), { recursive: true });
