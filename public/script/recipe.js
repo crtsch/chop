@@ -101,7 +101,7 @@ async function renderRecette(recipe, ingredients) {
     
     image.style.background = `linear-gradient(rgba(var(--accent), 0.1) 50%, rgba(var(--accent), 0.6) 100%),
                       linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5)) 100%,
-                      url(${recipe.imageUrl})`;
+                      url("${recipe.imageUrl}")`;
     image.querySelector('h1').innerText = recipe.title;
     document.getElementById('auteur').innerText = recipe.author;
 

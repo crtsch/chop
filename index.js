@@ -16,6 +16,9 @@ const publicAssetsPath = path.join(process.cwd(), 'public', 'assets');
 const getImageUrl = (folder, filename) => {
     const safeFilename = path.basename(filename || 'default.png');
     const uploadFile = path.join(uploadPath, folder, safeFilename);
+
+    console.log({ folder, filename, uploadPath, uploadFile });
+
     if (fs.existsSync(uploadFile)) {
         return `${uploadsUrl}/${folder}/${encodeURIComponent(safeFilename)}`;
     }
@@ -195,6 +198,7 @@ app.get('/recipes', async (req, res) => {
         const rows = await db.all(sql, params);
 
         const recipesWithImg = rows.map(row => {
+            console.log('ROW : ', row);
             const filename = row.image || 'default.png';
             return {
                 ...row,
