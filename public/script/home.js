@@ -131,8 +131,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Erreur chargement ingrédients", e);
   }
 
-  // idem pour les tags
-
   try {
     const response = await fetch('/tags');
     const tags = await response.json();

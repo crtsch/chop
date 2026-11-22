@@ -232,13 +232,20 @@ a {
 @media (max-width: 768px) {
 
     #darkmode-btn, #darkmode-btn img {
-        display: none;
+        position: absolute;
+        right: 20px;
+        top: 20px;
     }
 
     #menu {
         flex-direction: column;
         justify-content: center;
         height: auto;
+    }
+
+    #logo {
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     #logo, #logo a {

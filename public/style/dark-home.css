@@ -57,3 +57,8 @@
 .dark #maxprice-value {
     color: rgba(var(--dark-shadow), 0.8);
 }
+
+.dark #ing-search,
+.dark #tag-search {
+    color: rgb(var(--bg));
+}

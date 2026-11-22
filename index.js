@@ -17,18 +17,18 @@ const getImageUrl = (folder, filename) => {
     const safeFilename = path.basename(filename || 'default.png');
     const uploadFile = path.join(uploadPath, folder, safeFilename);
 
-    console.log({ folder, filename, uploadPath, uploadFile });
-
     if (fs.existsSync(uploadFile)) {
         return `${uploadsUrl}/${folder}/${encodeURIComponent(safeFilename)}`;
     }
 
-    const publicAsset = path.join(publicAssetsPath, folder, safeFilename);
-    if (fs.existsSync(publicAsset)) {
-        return `/assets/${folder}/${encodeURIComponent(safeFilename)}`;
+    if (!process.env.UPLOADS_PATH) {
+        const publicAsset = path.join(publicAssetsPath, folder, safeFilename);
+        if(fs.existsSync(publicAsset)) {
+            return `/assets/${folder}/${encodeURIComponent(safeFilename)}`;
+        }
+        return `/assets/${folder}/default.png`;
     }
-
-    return `/assets/${folder}/default.png`;
+    return `${uploadsUrl}/${folder}/default.png`;
 };
 
 fs.mkdirSync(path.join(uploadPath, "ingredients"), { recursive: true });
@@ -185,20 +185,16 @@ app.get('/recipes', async (req, res) => {
                         SELECT recipe_id
                         FROM recipe_tags
                         WHERE tag IN (${placeholders})
-                        GROUP BY recipe_id
-                        HAVING COUNT(DISTINCT tag) = ?
                     )
                 `;
 
                 params.push(...tagNames);
-                params.push(tagNames.length);
             }
         }
 
         const rows = await db.all(sql, params);
 
         const recipesWithImg = rows.map(row => {
-            console.log('ROW : ', row);
             const filename = row.image || 'default.png';
             return {
                 ...row,
